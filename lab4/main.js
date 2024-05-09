@@ -47,7 +47,7 @@ var map = L.map("map-canvas", {
 
 // 2. aerial photo * not working at this moment (see Assignment)
 //    - can be switched on/off by toggle thru L.control.layers (see below in this script)
-var wms_aerial_url = "https://geodata1.nationaalgeoregister.nl/luchtfoto/wms?";
+var wms_aerial_url = "";
 var basemap_aerial = new L.tileLayer.wms(wms_aerial_url, {
   layers: ["luchtfoto_png"],
   styles: "",
@@ -71,8 +71,39 @@ var sound = new L.tileLayer.wms(wms_sound_url, {
   pointerCursor: true,
 });
 
+var wms_parcels_url = "http://localhost:8080/geoserver/geoweb-delft/wms?";
+var parcels = new L.tileLayer.wms(wms_parcels_url, {
+  layers: ["geoweb-delft:parcels"],
+  styles: "",
+  format: "image/png",
+  transparent: true,
+  pointerCursor: true,
+});
+
+var wms_lab4_url = "http://localhost:8080/geoserver/geoweb-delft/wms?";
+var lab4 = new L.tileLayer.wms(wms_lab4_url, {
+  layers: ["geoweb-delft:TERREIN_VLAK", "geoweb-delft:GEBOUW_VLAK"],
+  styles: "",
+  format: "image/png",
+  transparent: true,
+  pointerCursor: true,
+});
+
+var wms_drones_url = "https://service.pdok.nl/lvnl/drone-no-flyzones/wms/v1_0?";
+var drones = new L.tileLayer.wms(wms_drones_url, {
+  layers: ["luchtvaartgebieden_zonder_natura2000", "landingsite"],
+  styles: "",
+  format: "image/png",
+  transparent: true,
+  pointerCursor: true,
+});
+
+
 var overlays = {
   "Road noise [WMS]": sound,
+  "Parcels [WMS]": parcels,
+  "Lab4 [WMS]": lab4,
+  "Drones [WMS]": drones,
 };
 
 var baseLayers = {
